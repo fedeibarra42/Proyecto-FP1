@@ -8,11 +8,10 @@ float baseball_menu(dinero){
 	float stats[40] = {84,92,74,68,79,93,87,81,80,78,95,83,81,76,74,88,86,85,76,68,90,83,71,67,63,100,98,97,68,64};
 
 	/*Divide cada numero del arreglo stats entre 162 que fue la cantidad de juegos que hubo en la temporada para generar 
-	  el promedio de juegos ganados de cada equipo.
-	*/
+	  el promedio de juegos ganados de cada equipo*/
 	for (c=0;c<30;c++)
 		stats[c]/=162;
-
+	/*la sintaxis es <<dinero = generacionPartidos("cantidad de equipos",equipos,dinero,"estadisticas")*/
 	dinero = generacionPartidos(30,equipos,dinero,stats); 
 
 	return dinero;
