@@ -12,7 +12,7 @@ float baseball_menu(dinero){
 	for (c=0;c<30;c++)
 		stats[c]/=162;
 	/*la sintaxis es <<dinero = generacionPartidos("cantidad de equipos",equipos,dinero,"estadisticas",[1(si hay empates] o 0 (si no hay empates),"marcador maximo","marcador minimo"*/
-	dinero = generacionPartidos(30,equipos,dinero,stats,1,18,0); 
+	dinero = generacionPartidos(30,equipos,dinero,stats,0,18,0); 
 
 	return dinero;
 }
