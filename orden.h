@@ -15,8 +15,58 @@ float victoria(int ordenEquipos[2][40],float dinero, float stats[40],int oponent
 	return dinero;
 }
 
+float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[]){
+	int c,seleccion,o,hora;
+	char equipoSeleccionado;
+	float apuesta;
 
-float generacionPartidos (int numeroEquipos, char equipos[40][15], float dinero, float stats[40]){
+	hora = time(NULL);
+	srand(hora);
+	o = rand() % numeroEquipos;
+
+	//Imprimir los partidos
+	printf("\n|| Seleccione un partido ||\n");
+	for (c=0;c<numeroEquipos;c+=2){
+		printf("[%d] %s (%.3f)", c+1, equipos[ordenEquipos[0][c]],stats[ordenEquipos[0][c]]);
+		printf("  vs  ");
+		printf("%s (%.3f)\n", equipos[ordenEquipos[0][c+1]],stats[ordenEquipos[0][c+1]]);
+	}
+
+	//Escoge el partido.
+	printf("Selecciona el partido al cual deseas apostar: ");
+	scanf("%d",&seleccion);
+
+	//Seleccion de equipo
+	printf("\n||  TU PARTIDO  ||\n");
+	printf("[l] %s  vs  [v] %s\n",equipos[ordenEquipos[0][seleccion-1]],equipos[ordenEquipos[0][seleccion]]);
+	printf("Selecciona entre local[l], visitante[v] o empate[e]\n");
+	scanf(" %c",&equipoSeleccionado);
+	printf("Cantidad a apostar: ");
+	scanf("%f",&apuesta);
+
+	//Genera los resultados
+	for (c=0;c<numeroEquipos;c++){
+			o = rand() % 13;
+			ordenEquipos[1][c] = o;
+		}
+
+	//Imprime los resultados
+	for (c=0;c<numeroEquipos;c+=2){
+		printf("%s (%d)", equipos[ordenEquipos[0][c]], ordenEquipos[0][c]);
+		printf("  vs  ");
+		printf("(%d)  %s\n", ordenEquipos[0][c+1], equipos[ordenEquipos[0][c+1]]);
+	}
+	getchar();
+	getchar();
+
+	//Apuesta
+	//if (ordenEquipos[0][c]>ordenEquipos[0][c+1] && equip)
+
+
+	return dinero;
+}
+
+float generacionPartidos (int numeroEquipos, char equipos[40][15], float dinero, float stats[40], int existeEmpate, int maximo, int minimo){
 	int ordenEquipos[2][40],c=1,o,i,hora,co,seleccion,oponente;
 	float apuesta;
 
@@ -49,70 +99,76 @@ float generacionPartidos (int numeroEquipos, char equipos[40][15], float dinero,
 		}
 	}
 
-	//Genera los partidos
-	printf("\n\n|| 	 PARTIDOS 	||\n");
-	for (c=0;c<numeroEquipos;c+=2){
-		printf("[%d] %s (%.3f)   ",c+1,equipos[ordenEquipos[0][c]],stats[ordenEquipos[0][c]]);
-		printf("vs");
-		printf("   [%d] %s  (%.3f)\n",c+2,equipos[ordenEquipos[0][c+1]],stats[ordenEquipos[0][c+1]]);
+	if(existeEmpate){
+		partidosConEmpates(ordenEquipos, numeroEquipos, equipos, dinero, stats);
 	}
-
-	printf("Selecciona el equipo al cual quieres apostar: ");
-	scanf("%d",&seleccion);
-
-	//Cantidad a apostar
-	c=1;
-	while (c){
-	printf("Cantidad a apostar: ");
-	scanf("%f",&apuesta);
-
-	if (apuesta>dinero){
-		printf("ERROR: No cuetnas con el dinero suficiente para hacer esta apuesta.\n[ENTER para continuar]");
-		getchar();
-		getchar();
-	}
-	else 
-		c--;
-	}
-
-	//Genera los resultados
-	for (c=0;c<numeroEquipos;c++){
-		o = rand() % 13;
-		ordenEquipos[1][c] = o;
-	}
-
-	printf("\n\n|| 	 RESULTADOS 	||\n");
-	for (c=0;c<numeroEquipos;c+=2){
-
-		//Evita los empates
-		if (ordenEquipos[1][c]==ordenEquipos[1][c+1])
-			ordenEquipos[1][c+1]++;
-
-		printf("%s( %d)   vs   (%d) %s\n",equipos[ordenEquipos[0][c]],ordenEquipos[1][c],ordenEquipos[1][c+1],equipos[ordenEquipos[0][c+1]]);
-	}
-	printf("[ENTER para continuar]\n");
-	getchar();
-	getchar();
-
-	//Identificador de equipos.
-
-	if (seleccion & 1)
-		oponente = seleccion;
-	else
-		oponente = seleccion - 2;
-
-	printf("\n\n|| 	 TU PARTIDO  ||\n");
-	printf("%s  (%d)\n  vs  \n%s  (%d)",equipos[ordenEquipos[0][seleccion-1]],ordenEquipos[1][seleccion-1],equipos[ordenEquipos[0][oponente]],ordenEquipos[1][oponente]);
-
-	//Hace los calculos monetarios.
-	if (ordenEquipos[1][seleccion-1] > ordenEquipos[1][oponente])
-		dinero = victoria(ordenEquipos,dinero,stats,oponente,seleccion,apuesta);
 	else{
-		dinero -= apuesta;
-		printf("\nHaz perdido: $%.2f\n", apuesta);
+		//Genera los partidos
+		printf("\n\n|| 	 PARTIDOS 	||\n");
+		for (c=0;c<numeroEquipos;c+=2){
+			printf("[%d] %s (%.3f)   ",c+1,equipos[ordenEquipos[0][c]],stats[ordenEquipos[0][c]]);
+			printf("vs");
+			printf("   [%d] %s  (%.3f)\n",c+2,equipos[ordenEquipos[0][c+1]],stats[ordenEquipos[0][c+1]]);
+		}
+
+		printf("Selecciona el equipo al cual quieres apostar: ");
+		scanf("%d",&seleccion);
+
+		//Cantidad a apostar
+		c=1;
+		while (c){
+		printf("Cantidad a apostar: ");
+		scanf("%f",&apuesta);
+
+		if (apuesta>dinero){
+			printf("ERROR: No cuetnas con el dinero suficiente para hacer esta apuesta.\n[ENTER para continuar]");
+			getchar();
+			getchar();
+		}
+		else 
+			c--;
+		}
+
+		//Genera los resultados
+		for (c=0;c<numeroEquipos;c++){
+			o = rand() % maximo;
+			o += minimo;
+			ordenEquipos[1][c] = o;
+		}
+
+		printf("\n\n|| 	 RESULTADOS 	||\n");
+		for (c=0;c<numeroEquipos;c+=2){
+
+			//Evita los empates
+			if (ordenEquipos[1][c]==ordenEquipos[1][c+1])
+				ordenEquipos[1][c+1]++;
+
+			printf("%s( %d)   vs   (%d) %s\n",equipos[ordenEquipos[0][c]],ordenEquipos[1][c],ordenEquipos[1][c+1],equipos[ordenEquipos[0][c+1]]);
+		}
+		printf("[ENTER para continuar]\n");
+		getchar();
+		getchar();
+
+		//Identificador de equipos.
+
+		if (seleccion & 1)
+			oponente = seleccion;
+		else
+			oponente = seleccion - 2;
+
+		printf("\n\n|| 	 TU PARTIDO  ||\n");
+		printf("%s  (%d)\n  vs  \n%s  (%d)",equipos[ordenEquipos[0][seleccion-1]],ordenEquipos[1][seleccion-1],equipos[ordenEquipos[0][oponente]],ordenEquipos[1][oponente]);
+
+		//Hace los calculos monetarios.
+		if (ordenEquipos[1][seleccion-1] > ordenEquipos[1][oponente])
+			dinero = victoria(ordenEquipos,dinero,stats,oponente,seleccion,apuesta);
+		else{
+			dinero -= apuesta;
+			printf("\nHaz perdido: $%.2f\n", apuesta);
+		}
 	}
 
 
-	return dinero;
+		return dinero;
 }
 
