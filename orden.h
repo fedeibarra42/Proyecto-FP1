@@ -66,7 +66,6 @@ float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipo
 	}
 
 	//Genera los resultados
-
 	for (c=0;c<numeroEquipos;c++){
 		o = rand() % maximo;
 		o += minimo;
@@ -75,23 +74,29 @@ float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipo
 
 	//Imprime los resultados
 	for (c=0;c<numeroEquipos;c+=2){
-		printf("%s (%d)", equipos[ordenEquipos[0][c]], ordenEquipos[0][c]);
+		printf("%s (%d)", equipos[ordenEquipos[0][c]], ordenEquipos[1][c]);
 		printf("  vs  ");
-		printf("(%d)  %s\n", ordenEquipos[0][c+1], equipos[ordenEquipos[0][c+1]]);
+		printf("(%d)  %s\n", ordenEquipos[1][c+1], equipos[ordenEquipos[0][c+1]]);
 	}
+
 	getchar();
 	getchar();
 
 	//Identifica contendientes
 
 	if (equipoSeleccionado == 'l'){
-			select = ordenEquipos[0][seleccion-1];
-			oponente = ordenEquipos[0][seleccion];
+		select = ordenEquipos[0][seleccion-1];
+		oponente = ordenEquipos[0][seleccion];
 	}
 
 	else if (equipoSeleccionado == 'v'){
-			select = ordenEquipos[0][seleccion];
-			oponente = ordenEquipos[0][seleccion-1];
+		select = ordenEquipos[0][seleccion];
+		oponente = ordenEquipos[0][seleccion-1];
+	}
+
+	else {
+		select = ordenEquipos[0][seleccion];
+		oponente = ordenEquipos[0][seleccion];
 	}
 
 	//Apuesta
