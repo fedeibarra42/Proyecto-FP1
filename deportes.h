@@ -16,7 +16,21 @@ float baseball_menu(dinero){
 
 	return dinero;
 }
+float soccer_menu(dinero){
+	char equipos[40][15] = {{"Barcelona"},{"Real Madrid"},{"Sevilla"},{"Real Sociedad"},{"Espanyol"},{"Malaga"},{"Valencia"},{"Las Palmas UD"},{"Getafe"},{"Deportivo"},
+	{"Celta Vigo"},{"Sporting Gijon"},{"Levante"},{"Villarreal"},{"SD Eibar"},{"Granada"},{"Athletic"},{"Betis"},{"Atletico Madrid"},{"Rayo Vallecano"}};
+	int c;
+	
 
+	float stats[40] = {30,30,23,11,13,14,22,10,9,7,13,10,9,16,10,7,15,10,23,15};
+
+	
+	for (c=0;c<20;c++)
+		stats[c]/=38;
+	dinero = generacionPartidos(20,equipos,dinero,stats,1,5,0); 
+
+	return dinero;
+}
 float americano_menu(dinero){
 	char equipos[40][15]={{"Patriots"},{"Bills"},{"Jets"},{"Dolphins"},{"Broncos"},{"Chiefs"},{"Raiders"},
 			{"Chargers"},{"Ravens"},{"Bengals"},{"Browns"},{"Steelers"},{"Texans"},{"Colts"},{"Jaguars"},
@@ -42,6 +56,10 @@ float menu_deportes(dinero){
 		scanf("%d",&selector);
 
 		switch(selector){
+			
+			case 1:
+				dinero = soccer_menu(dinero);
+				break;
 			case 2:
 				dinero = americano_menu(dinero);
 				break;
