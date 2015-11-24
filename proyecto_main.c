@@ -3,14 +3,18 @@
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
+//#include "estructuras.h"
+//#include "registros.h"
 #include "orden.h"
 #include "deportes.h"
 #include "cuetna.h"
 #include "ayuda.h"
 
+//El usuario y contraseña son 'q' por default ya que no tenemos sitema de usuarios actualmente.
 
-void ingreso(char usuarioGuardado[10], char contraseñaGuardada[10]){
-	char usuario[10],contraseña[10];
+
+void ingreso(char usuarioGuardado[10], char contrasenaGuardada[10]){
+	char usuario[10],contrasena[10];
 	int c=1;
 
 	while (c<4){
@@ -18,12 +22,12 @@ void ingreso(char usuarioGuardado[10], char contraseñaGuardada[10]){
 		printf("\n\n||	INTENTO NUMERO: %d	||\n",c);
 		printf("Usuario: "); 
 		scanf("%s",usuario);
-		printf("\nContraseña: ");
-		scanf("%s",contraseña);
+		printf("\ncontrasena: ");
+		scanf("%s",contrasena);
 		printf("\n");
 
 		
-		if (strcmp (usuario,usuarioGuardado) && strcmp(contraseña,contraseñaGuardada)){
+		if (strcmp (usuario,usuarioGuardado) && strcmp(contrasena,contrasenaGuardada)){
 			printf("Usuario no valido\n");
 		}
 		else{
@@ -45,7 +49,7 @@ void ingreso(char usuarioGuardado[10], char contraseñaGuardada[10]){
  
  int main (){
  	int selector=1;
- 	char usr[10]= "q" , csñ[10] = "q";
+ 	char usr[10]= "q" , csn[10] = "q";
 
  	while (selector){
  		printf("\n\n||	MENU PRINCIPAL	||\n1-Ingresar\n2-Crear usuario\n3-Ayuda\n0-Salir\n");
@@ -53,7 +57,7 @@ void ingreso(char usuarioGuardado[10], char contraseñaGuardada[10]){
 
  		switch(selector){
  			case 1:
- 				ingreso(usr,csñ);
+ 				ingreso(usr,csn);
  				break;
  			/*case 2:
  				crear_usuario();
