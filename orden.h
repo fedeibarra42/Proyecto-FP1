@@ -1,6 +1,6 @@
 //Algoritmo de apuestas.
 
-float victoria(int ordenEquipos[2][40],float dinero, float stats[40],int oponente,int seleccion, float apuesta){
+float victoria(int ordenEquipos[2][40],float dinero, float stats[40],int oponente,int seleccion, float apuesta, int id){
 	float porcentaje,ganancia;
 
 	printf("\n¡¡¡HAZ GANADO!!!\n");
@@ -12,13 +12,13 @@ float victoria(int ordenEquipos[2][40],float dinero, float stats[40],int oponent
 	printf("Tus ganancias son de: $%.2f\n[ENTER para continuar]\n", ganancia);
 
 	//Funcion de guardar el registro
-	ingresarRegistro(0,"Apuesta ganada" , ganancia);
+	ingresarRegistro(id ,"Apuesta ganada", ganancia);
 
 
 	return dinero;
 }
 
-float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[],int maximo, int minimo){
+float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[],int maximo, int minimo, int id){
 	int c,seleccion,o,hora, oponente, select, a=1,ab=1;
 	char equipoSeleccionado;
 	float apuesta;
@@ -123,26 +123,26 @@ float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipo
 	//Apuesta
 
 	if (equipoSeleccionado == 'l' && ordenEquipos[1][select] > ordenEquipos[1][oponente])
-		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta);
+		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta, id);
 
 	else if (equipoSeleccionado == 'v' && ordenEquipos[1][select] < ordenEquipos[1][oponente])
-		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta);
+		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta, id);
 
 	else if (equipoSeleccionado == 'e' && ordenEquipos[1][select] == ordenEquipos[1][oponente])
-		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta);
+		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta, id);
 
 	else{
 		dinero -= apuesta;
 		printf("\nHaz perdido: $%.2f\n", apuesta);
 		apuesta *= -1;
-		ingresarRegistro(0,"Apuesta perdida" , apuesta);
+		ingresarRegistro(id,"Apuesta perdida" , apuesta);
 	}
 
 
 	return dinero;
 }
 
-float partidosSinEmpate (int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[],int maximo, int minimo){
+float partidosSinEmpate (int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[],int maximo, int minimo, int id){
 	int c,seleccion,o,hora,oponente,co,a=1;
 	char equipoSeleccionado;
 	float apuesta;
@@ -223,18 +223,18 @@ float partidosSinEmpate (int ordenEquipos[2][40], int numeroEquipos, char equipo
 
 	//Hace los calculos monetarios.
 	if (ordenEquipos[1][seleccion-1] > ordenEquipos[1][oponente])
-		dinero = victoria(ordenEquipos,dinero,stats,oponente,seleccion,apuesta);
+		dinero = victoria(ordenEquipos,dinero,stats,oponente,seleccion,apuesta,id);
 	else{
 		dinero -= apuesta;
 		printf("\nHaz perdido: $%.2f\n", apuesta);
 		apuesta *= -1;
-		ingresarRegistro(0,"Apuesta perdida" , apuesta);
+		ingresarRegistro(id,"Apuesta perdida" , apuesta);
 	}
 	
 	return dinero;
 }
 
-float generacionPartidos (int numeroEquipos, char equipos[40][15], float dinero, float stats[40], int existeEmpate, int maximo, int minimo){
+float generacionPartidos (int numeroEquipos, char equipos[40][15], float dinero, float stats[40], int existeEmpate, int maximo, int minimo,int id){
 	int ordenEquipos[2][40],c=1,o,i,hora,co;
 
 	hora = time(NULL);
@@ -267,10 +267,10 @@ float generacionPartidos (int numeroEquipos, char equipos[40][15], float dinero,
 	}
 
 	if(existeEmpate){
-		dinero = partidosConEmpates(ordenEquipos, numeroEquipos, equipos, dinero, stats, maximo, minimo);
+		dinero = partidosConEmpates(ordenEquipos, numeroEquipos, equipos, dinero, stats, maximo, minimo,id);
 	}
 	else{
-		dinero = partidosSinEmpate(ordenEquipos, numeroEquipos, equipos, dinero, stats, maximo, minimo);
+		dinero = partidosSinEmpate(ordenEquipos, numeroEquipos, equipos, dinero, stats, maximo, minimo,id);
 	}
 
 
