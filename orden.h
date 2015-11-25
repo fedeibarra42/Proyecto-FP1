@@ -10,7 +10,10 @@ float victoria(int ordenEquipos[2][40],float dinero, float stats[40],int oponent
 	ganancia = apuesta + (apuesta / porcentaje);
 	dinero += ganancia;
 	printf("Tus ganancias son de: $%.2f\n[ENTER para continuar]\n", ganancia);
-	getchar();
+
+	//Funcion de guardar el registro
+	ingresarRegistro(0,"Apuesta ganada" , ganancia);
+
 
 	return dinero;
 }
@@ -85,30 +88,36 @@ float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipo
 	//Identifica contendientes
 
 	if (equipoSeleccionado == 'l'){
-		select = ordenEquipos[0][seleccion-1];
-		oponente = ordenEquipos[0][seleccion];
+		select = seleccion-1;
+		oponente = seleccion;
 	}
 
 	else if (equipoSeleccionado == 'v'){
-		select = ordenEquipos[0][seleccion];
-		oponente = ordenEquipos[0][seleccion-1];
+		select = seleccion-1;
+		oponente = seleccion;
 	}
 
 	else {
-		select = ordenEquipos[0][seleccion];
-		oponente = ordenEquipos[0][seleccion];
+		select = seleccion-1;
+		oponente = seleccion;
 	}
 
 	//Apuesta
-	if (equipoSeleccionado == 'l' && ordenEquipos[0][seleccion-1] > ordenEquipos[0][seleccion])
+
+	if (equipoSeleccionado == 'l' && ordenEquipos[1][select] > ordenEquipos[1][oponente])
 		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta);
-	else if (equipoSeleccionado == 'v' && ordenEquipos[0][seleccion-1] < ordenEquipos[0][seleccion])
+
+	else if (equipoSeleccionado == 'v' && ordenEquipos[1][select] < ordenEquipos[1][oponente])
 		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta);
-	else if (equipoSeleccionado == 'e' && ordenEquipos[0][seleccion-1] == ordenEquipos[0][seleccion])
+
+	else if (equipoSeleccionado == 'e' && ordenEquipos[1][select] == ordenEquipos[1][oponente])
 		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta);
+
 	else{
 		dinero -= apuesta;
 		printf("\nHaz perdido: $%.2f\n", apuesta);
+		apuesta *= -1;
+		ingresarRegistro(0,"Apuesta perdida" , apuesta);
 	}
 
 
@@ -196,6 +205,8 @@ float partidosSinEmpate (int ordenEquipos[2][40], int numeroEquipos, char equipo
 	else{
 		dinero -= apuesta;
 		printf("\nHaz perdido: $%.2f\n", apuesta);
+		apuesta *= -1;
+		ingresarRegistro(0,"Apuesta perdida" , apuesta);
 	}
 	
 	return dinero;
