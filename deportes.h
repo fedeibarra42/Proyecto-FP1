@@ -46,13 +46,36 @@ float americano_menu(float dinero, int id){
 	return dinero;
 }
 
+float hockey_menu(dinero){
+	char equipos[40][15]={{"Ducks"},{"Blackhawks"},{"Bruins"},{"Hurricanes"},{"Coyotes"},{"Avalanche"},{"Sabres"},
+			{"Blue Jackets"},{"Flames"},{"Stars"},{"Red Wings"},{"Devils"},{"Oilers"},{"Wild"},{"Panthers"},{"Islanders"},
+			{"Kings"},{"Predators"},{"Canadiens"},{"Rangers"},{"Sharks"},{"Blues"},{"Senators"},{"Flyers"},{"Canucks"},
+			{"Jets"},{"Lightning"},{"Penguins"},{"Maple Leafs"},{"Capitals"}};
+	int c;
+	float stats[40]={51,48,41,30,24,39,23,42,45,41,43,32,24,46,38,47,40,47,50,53,40,51,43,33,48,43,50,43,30,45};
+	for(c=0;c<30;c++)
+		stats[c]/=82;
+
+	dinero=generacionPartidos(30,equipos,dinero,stats);
+	return dinero;
+}
+
+float F1_menu(dinero){
+	char equipos[40][15]={{"Hamilton"},{"Rosberg"},{"Vettel"},{"Räikkönen"},{"Massa"},{"Bottas"},{"Ricciardo"},{"Kvyat"},
+	{"Pérez"},{"Hulkenberg"},{"Grosjean"},{"Maldonado"},{"Verstappen"},{"Sainz"},{"Ericsson"},{"Nasr"},
+	{"Alonso"},{"Button"},{"Stevens"},{"Rossi"},{"Merhi"}};
+	int stats[40]={363,297,266,135,177,136,84,94,68,52,49,27,49,18,9,27,11,16,0,0,0};
+	dinero=generacionPartidos(21,equipos,dinero,stats);
+	return dinero;
+}
+
 float menu_deportes(float dinero, int id){
 	int selector=1;
 
 	while (selector){
 		
 		printf("\n\n||	 MENU DE DEPORTES	||\n");
-		printf("1-Futbol (soccer)\n2-Football (americano)\n3-Basketball\n4-Baseball\n0-Regresar\n");
+		printf("1-Futbol (soccer)\n2-Football (americano)\n3-Basketball\n4-Baseball\n5-Hockey\n6-F1\n0-Regresar\n");
 		scanf("%d",&selector);
 
 		switch(selector){
@@ -65,6 +88,12 @@ float menu_deportes(float dinero, int id){
 				break;
 			case 4:
 				dinero = baseball_menu(dinero, id);
+				break;
+			case 5:
+				dinero = hockey_menu(dinero, id);
+				break;
+			case 6:
+				dinero = F1_menu(dinero, id);
 				break;
 		}
 	}
