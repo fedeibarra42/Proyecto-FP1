@@ -1,5 +1,5 @@
-float baseball_menu(dinero){
-	char equipos[40][15] = {{"Giants"},{"Dodgers"},{"Padres"},{"Roockies"},{"Dimodbacks"},{"Blue Jays"},{"Orioles"},{"Rays"},{"Red Sox"},{"Yankees"},
+float baseball_menu(float dinero, int id){
+	char equipos[40][15] = {{"Giants"},{"Dodgers"},{"Padres"},{"Rockies"},{"Dimondbacks"},{"Blue Jays"},{"Orioles"},{"Rays"},{"Red Sox"},{"Yankees"},
 				{"Royals"},{"Twins"},{"Indians"},{"White Sox"},{"Tigers"},{"Rangers"},{"Astros"},{"Angels"},{"Marineers"},{"Athletics"},{"Mets"},{"Nationals"},
 				{"Marlins"},{"Braves"},{"Phillies"},{"Cardinals"},{"Pirates"},{"Cubs"},{"Brewers"},{"Reds"}};
 	int c;
@@ -12,11 +12,11 @@ float baseball_menu(dinero){
 	for (c=0;c<30;c++)
 		stats[c]/=162;
 	/*la sintaxis es <<dinero = generacionPartidos("cantidad de equipos",equipos,dinero,"estadisticas",[1(si hay empates] o 0 (si no hay empates),"marcador maximo","marcador minimo"*/
-	dinero = generacionPartidos(30,equipos,dinero,stats,0,18,0); 
+	dinero = generacionPartidos(30,equipos,dinero,stats,0,18,0,id); 
 
 	return dinero;
 }
-float soccer_menu(dinero){
+float soccer_menu(float dinero, int id){
 	char equipos[40][15] = {{"Barcelona"},{"Real Madrid"},{"Sevilla"},{"Real Sociedad"},{"Espanyol"},{"Malaga"},{"Valencia"},{"Las Palmas UD"},{"Getafe"},{"Deportivo"},
 	{"Celta Vigo"},{"Sporting Gijon"},{"Levante"},{"Villarreal"},{"SD Eibar"},{"Granada"},{"Athletic"},{"Betis"},{"Atletico Madrid"},{"Rayo Vallecano"}};
 	int c;
@@ -27,11 +27,11 @@ float soccer_menu(dinero){
 	
 	for (c=0;c<20;c++)
 		stats[c]/=38;
-	dinero = generacionPartidos(20,equipos,dinero,stats,1,5,0); 
+	dinero = generacionPartidos(20,equipos,dinero,stats,1,5,0,id); 
 
 	return dinero;
 }
-float americano_menu(dinero){
+float americano_menu(float dinero, int id){
 	char equipos[40][15]={{"Patriots"},{"Bills"},{"Jets"},{"Dolphins"},{"Broncos"},{"Chiefs"},{"Raiders"},
 			{"Chargers"},{"Ravens"},{"Bengals"},{"Browns"},{"Steelers"},{"Texans"},{"Colts"},{"Jaguars"},
 			{"Titans"},{"Cowboys"},{"Gigants"},{"Eagles"},{"Redskins"},{"Cardinals"},{"49ers"},{"Seahawks"},{"Rams"},
@@ -42,11 +42,11 @@ float americano_menu(dinero){
 		stats[c]/=16;
 
 	numeroEquipos=32;
-	dinero = generacionPartidos(numeroEquipos,equipos,dinero,stats,0,40,2);
+	dinero = generacionPartidos(numeroEquipos,equipos,dinero,stats,0,40,2,id);
 	return dinero;
 }
 
-float menu_deportes(dinero){
+float menu_deportes(float dinero, int id){
 	int selector=1;
 
 	while (selector){
@@ -58,13 +58,13 @@ float menu_deportes(dinero){
 		switch(selector){
 			
 			case 1:
-				dinero = soccer_menu(dinero);
+				dinero = soccer_menu(dinero, id);
 				break;
 			case 2:
-				dinero = americano_menu(dinero);
+				dinero = americano_menu(dinero, id);
 				break;
 			case 4:
-				dinero = baseball_menu(dinero);
+				dinero = baseball_menu(dinero, id);
 				break;
 		}
 	}
