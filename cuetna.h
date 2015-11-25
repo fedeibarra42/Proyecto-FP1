@@ -1,6 +1,6 @@
-void menu_cuenta(){
+float menu_cuenta(float dinero, int id){
 	int selector=1;
-	float cantidadDepsito, cantidadRetiro, dinero;
+	float cantidadDepsito, cantidadRetiro;
 
 	while (selector){
 		printf("\n\n||	 MENU DE USUARIO 	||\n");
@@ -19,8 +19,10 @@ void menu_cuenta(){
 					getchar();
 				}
 
-				else
+				else{
 					dinero+=cantidadDepsito;
+					ingresarRegistro(id, "Deposito", cantidadDepsito);
+				}
 
 				break;
 
@@ -51,8 +53,9 @@ void menu_cuenta(){
 				dinero = menu_deportes(dinero);
 				break;
 
-			/*case 4:
-				break;*/
+			case 4:
+				leerRegistro(id);
+				break;
 			case 5:
 				printf("\nCuentas con $%.2f\n",dinero);
 				getchar();
@@ -60,4 +63,5 @@ void menu_cuenta(){
 				break;
 		}
 	}
+	return dinero;
 }
