@@ -18,6 +18,76 @@ float victoria(int ordenEquipos[2][40],float dinero, float stats[40],int oponent
 	return dinero;
 }
 
+float formula1(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[], int id){
+	int c,a=1, seleccion;
+	float apuesta;
+
+
+	//Imprime toda la parrilla
+
+	printf("\n\n||  CORREDORES  ||\n");
+	for (c=0;c<numeroEquipos;c++)
+		printf("[%d] %s  (%.0f pts) \n",c+1,equipos[c],stats[c]);
+
+	//Seleccion del corredor
+	while(a){
+		printf("Selecciona a un corredor: ");
+		scanf("%d",&seleccion);
+
+		if (seleccion<1 || seleccion>numeroEquipos){
+			printf("ERROR: seleccion no valida\n[ENTER para continuar]\n");
+			getchar();
+			getchar();
+		}
+
+		else 
+			a--;
+
+	}
+
+	//Cantidad a apostar
+	c=1;
+	while (c){
+	printf("Cantidad a apostar[0 para All In]: ");
+	scanf("%f",&apuesta);
+
+		if (apuesta>dinero){
+			printf("ERROR: No cuetnas con el dinero suficiente para hacer esta apuesta.\n[ENTER para continuar]");
+			getchar();
+			getchar();
+		}
+		else if (apuesta == 0){
+			apuesta = dinero;
+			c--;
+		}
+		else 
+			c--;
+	}
+
+	//Imprime los resultados
+	printf("\n\n||  FIN DE LA CARRERA  ||\n");
+	for (c=0;c<numeroEquipos;c++)
+		printf("[%d] - %s\n",c+1,equipos[ordenEquipos[0][c]]);
+
+	printf("[presione ENTER]\n", );
+	getchar();
+	getchar();
+
+	seleccion--;
+
+	if (ordenEquipos[0][0]==seleccion-1)
+		dinero = victoria(ordenEquipos, dinero,  stats, seleccion, seleccion, apuesta, id);
+	else{
+		dinero -= apuesta;
+		printf("\nHaz perdido: $%.2f\n", apuesta);
+		apuesta *= -1;
+		ingresarRegistro(id,"Apuesta perdida" , apuesta);
+	}
+
+	return dinero;
+
+}
+
 float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[],int maximo, int minimo, int id){
 	int c,seleccion,o,hora, oponente, select, a=1,ab=1;
 	char equipoSeleccionado;
@@ -266,8 +336,11 @@ float generacionPartidos (int numeroEquipos, char equipos[40][15], float dinero,
 		}
 	}
 
-	if(existeEmpate){
+	if(existeEmpate==1){
 		dinero = partidosConEmpates(ordenEquipos, numeroEquipos, equipos, dinero, stats, maximo, minimo,id);
+	}
+	else if (existeEmpate == 2){
+		dinero = formula1(ordenEquipos, numeroEquipos, equipos, dinero, stats, id);
 	}
 	else{
 		dinero = partidosSinEmpate(ordenEquipos, numeroEquipos, equipos, dinero, stats, maximo, minimo,id);
