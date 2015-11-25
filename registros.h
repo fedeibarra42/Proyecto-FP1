@@ -3,11 +3,13 @@ void ingresarRegistro (int id, char concepto[], float monto){
 	registro r;
 	usuario u[100];
 	char nombreArchivo[15], formato[5] = ".txt";
+	int c = 0;
 
 	archUsr = fopen("usuarios.txt","r");
 
 	while (!feof(archUsr)){
-		fread(&u,sizeof(usuario),1,archUsr);
+		fread(&u[c],sizeof(usuario),1,archUsr);
+		c++;
 	}
 	fclose(archUsr);
 
@@ -32,23 +34,28 @@ void leerRegistro (int id){
 	registro l;
 	usuario u[100];
 	char nombreArchivo[15], formato[5] = ".txt";
+	int c=0;
 
 	archUsr = fopen("usuarios.txt","r");
 
 	while (!feof(archUsr)){
-		fread(&u,sizeof(usuario),1,archUsr);
+		fread(&u[c],sizeof(usuario),1,archUsr);
+		c++;
 	}
-	
+
 	fclose(archUsr);
 
 	strcpy (nombreArchivo,strcat(u[id].nombre,formato));
 
 	archivo = fopen(nombreArchivo, "r");
 
+	fread(&l,sizeof(registro),1,archivo);
+
 	while(!feof(archivo)){
-		fread(&l,sizeof(registro),1,archivo);
-		printf("Concepto: %s\n",l.concepto);
+		printf("\n________________________________\n");
+		printf("\nConcepto: %s\n",l.concepto);
 		printf("Monto: $%.3f\n", l.monto);
+		fread(&l,sizeof(registro),1,archivo);
 	}
 
 	fclose(archivo);
