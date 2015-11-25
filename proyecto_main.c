@@ -3,38 +3,46 @@
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
-//#include "estructuras.h"
-//#include "registros.h"
+#include "estructuras.h"
+#include "registros.h"
 #include "orden.h"
 #include "deportes.h"
 #include "cuetna.h"
 #include "ayuda.h"
 
-//El usuario y contraseña son 'q' por default ya que no tenemos sitema de usuarios actualmente.
 
+void ingreso(){
+	char usuarioIntroducido[11],contrasenaIntroducida[11];
+	int c=1,i=0,id=0,op=1;
+	FILE *archivo;
+	usuario usrs[100];
 
-void ingreso(char usuarioGuardado[10], char contrasenaGuardada[10]){
-	char usuario[10],contrasena[10];
-	int c=1;
+	archivo = fopen("usuarios.txt","r");
 
-	while (c<4){
+	while (!feof(archivo)){
+		fread (&usrs[i],sizeof(usuario),1,archivo);
+		i++;
+	}
+
+	fclose(archivo);
+
+	while (c<4 && op){
 
 		printf("\n\n||	INTENTO NUMERO: %d	||\n",c);
 		printf("Usuario: "); 
-		scanf("%s",usuario);
+		scanf("%s",usuarioIntroducido);
 		printf("\ncontrasena: ");
-		scanf("%s",contrasena);
+		scanf("%s",contrasenaIntroducida);
 		printf("\n");
 
-		
-		if (strcmp (usuario,usuarioGuardado) && strcmp(contrasena,contrasenaGuardada)){
-			printf("Usuario no valido\n");
-		}
-		else{
-			printf("Usuario valido\n");
-			menu_cuenta();
-			c=0;
-			break;
+		while (id <= i ){
+			if (strcmp(usuarioIntroducido,usrs[id].nombre) == 0 || strcmp(contrasenaIntroducida,usrs[id].contrasena)==0){
+				usrs[id].dinero = menu_cuenta(usrs[id].dinero,id);
+				op--;
+				break;
+			}
+			else
+				id++;
 		}
 
 		c++;
@@ -45,11 +53,52 @@ void ingreso(char usuarioGuardado[10], char contrasenaGuardada[10]){
 		getchar();
 		getchar();
 	}
+
+	archivo = fopen("usuarios.txt","w");
+
+	for (c=0;c<=i;c++)
+		fwrite(&usrs[c],sizeof(usuario),1,archivo);
+
+	fclose(archivo);
+
+}
+
+void crear_usuario(){
+	FILE *archivo;
+	usuario usr;
+	int id;
+
+	archivo = fopen("usuarios.txt","r");
+
+	while (!feof(archivo)){
+		fread(&usr,sizeof(usuario),1,archivo);
+		id = usr.id;
+	}
+	fclose(archivo);
+
+	if (id>100 || id <0)
+		id = 0;
+
+	printf("Nombre de usuario [10 caracteres como maximo y sin espacios]: ");
+	scanf(" %s",usr.nombre);/*FALTA VALIDACION*/
+
+	printf("CONTRASEÑA [10 caracteres como maximo y sin espacios]: ");
+	scanf(" %s",usr.contrasena);/*FALTA VALIDACION*/
+
+	printf("Dinero inicial: ");
+	scanf("%f",&usr.dinero);
+
+	usr.id = id;
+
+	archivo = fopen("usuarios.txt","a");
+	fwrite(&usr,sizeof(usuario),1,archivo);
+	fclose(archivo);
+
+
 }
  
  int main (){
  	int selector=1;
- 	char usr[10]= "q" , csn[10] = "q";
 
  	while (selector){
  		printf("\n\n||	MENU PRINCIPAL	||\n1-Ingresar\n2-Crear usuario\n3-Ayuda\n0-Salir\n");
@@ -57,11 +106,11 @@ void ingreso(char usuarioGuardado[10], char contrasenaGuardada[10]){
 
  		switch(selector){
  			case 1:
- 				ingreso(usr,csn);
+ 				ingreso();
  				break;
- 			/*case 2:
+ 			case 2:
  				crear_usuario();
- 				break;*/
+ 				break;
  			case 3:
  				ayuda();
  				break;
