@@ -21,7 +21,7 @@ float menu_cuenta(float dinero, int id){
 
 				else{
 					dinero+=cantidadDepsito;
-					ingresarRegistro(id, "Deposito", cantidadDepsito);
+					ingresarRegistro(id, "Deposito" , cantidadDepsito);
 				}
 
 				break;
@@ -45,12 +45,14 @@ float menu_cuenta(float dinero, int id){
 
 				else
 					dinero -= cantidadRetiro;
+					cantidadRetiro *= -1;
+					ingresarRegistro(id, "Retiro" , cantidadRetiro);
 				
 				break;
 
 			case 3:
 
-				dinero = menu_deportes(dinero);
+				dinero = menu_deportes(dinero,id);
 				break;
 
 			case 4:
