@@ -19,13 +19,13 @@ float victoria(int ordenEquipos[2][40],float dinero, float stats[40],int oponent
 }
 
 float formula1(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[], int id){
-	int c,a=1, seleccion;
+	int c,a=1, seleccion, hora, decimas[40],o;
 	float apuesta;
-
 
 	//Imprime toda la parrilla
 
 	printf("\n\n||  CORREDORES  ||\n");
+	printf("\n________________________________\n");
 	for (c=0;c<numeroEquipos;c++)
 		printf("[%d] %s  (%.0f pts) \n",c+1,equipos[c],stats[c]);
 
@@ -64,12 +64,27 @@ float formula1(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15],
 			c--;
 	}
 
+	//Genera el tiempo de carrera
+	hora = time(NULL);
+	srand(hora);
+	o = rand() % 15;
+	o += 10;
+
+	for (c=0;c<numeroEquipos;c++){
+		o += 1;
+		ordenEquipos[1][c] = o;
+		decimas[c] = rand() % 950;
+		decimas[c] += 40;
+	}
+
+
 	//Imprime los resultados
 	printf("\n\n||  FIN DE LA CARRERA  ||\n");
+	printf("\n________________________________\n");
 	for (c=0;c<numeroEquipos;c++)
-		printf("[%d] - %s\n",c+1,equipos[ordenEquipos[0][c]]);
+		printf("[%d] - %s__________ 1:%d.%d\n",c+1,equipos[ordenEquipos[0][c]],ordenEquipos[1][c],decimas[c]);
 
-	printf("[presione ENTER]\n", );
+	printf("[presione ENTER]\n");
 	getchar();
 	getchar();
 
