@@ -65,7 +65,7 @@ float F1_menu(dinero, id){
 	{"Pérez"},{"Hulkenberg"},{"Grosjean"},{"Maldonado"},{"Verstappen"},{"Sainz"},{"Ericsson"},{"Nasr"},
 	{"Alonso"},{"Button"},{"Stevens"},{"Rossi"},{"Merhi"}};
 	
-	float stats[40]={363,297,266,135,177,136,84,94,68,52,49,27,49,18,9,27,11,16,0,0,0};
+	float stats[40]={363,297,266,135,177,136,84,94,68,52,49,27,49,18,9,27,11,16,1,1,1;
 
 	dinero=generacionPartidos(21,equipos,dinero,stats,2,0,0,id);
 	return dinero;
