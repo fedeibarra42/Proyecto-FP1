@@ -106,7 +106,7 @@ float basketball_menu(dinero, id){
 	for (c=0;c<30;c++)
 		stats[c]/=82;
 
-	dinero = generacionPartidos(30,equipos,dinero,stats,0,143,65,id);
+	dinero = generacionPartidos(30,equipos,dinero,stats,0,40,85,id);
 	return dinero;
 }
 
