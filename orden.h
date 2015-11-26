@@ -103,7 +103,7 @@ float formula1(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][30],
 
 }
 
-float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][30], float dinero, float stats[],int maximo, int minimo, int id){
+float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][30], float dinero, float stats[40],int maximo, int minimo, int id){
 	int c,seleccion,o,hora, oponente, select, a=1,ab=1;
 	char equipoSeleccionado;
 	float apuesta;
@@ -207,14 +207,23 @@ float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipo
 
 	//Apuesta
 
-	if (equipoSeleccionado == 'l' && ordenEquipos[1][select] > ordenEquipos[1][oponente])
+	if (equipoSeleccionado == 'l' && ordenEquipos[1][select] > ordenEquipos[1][oponente]){
+		select++;
+		oponente++;
 		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta, id);
+	}
 
-	else if (equipoSeleccionado == 'v' && ordenEquipos[1][select] < ordenEquipos[1][oponente])
+	else if (equipoSeleccionado == 'v' && ordenEquipos[1][select] < ordenEquipos[1][oponente]){
+		select++;
+		oponente++;
 		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta, id);
+	}
 
-	else if (equipoSeleccionado == 'e' && ordenEquipos[1][select] == ordenEquipos[1][oponente])
+	else if (equipoSeleccionado == 'e' && ordenEquipos[1][select] == ordenEquipos[1][oponente]){
+		select++;
+		oponente++;
 		dinero = victoria(ordenEquipos, dinero,  stats, oponente, select, apuesta, id);
+	}
 
 	else{
 		dinero -= apuesta;
