@@ -18,7 +18,7 @@ float victoria(int ordenEquipos[2][40],float dinero, float stats[40],int oponent
 	return dinero;
 }
 
-float formula1(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[], int id){
+float formula1(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][30], float dinero, float stats[], int id){
 	int c,a=1, seleccion, hora, decimas[40],o;
 	float apuesta;
 
@@ -103,7 +103,7 @@ float formula1(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15],
 
 }
 
-float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[],int maximo, int minimo, int id){
+float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][30], float dinero, float stats[],int maximo, int minimo, int id){
 	int c,seleccion,o,hora, oponente, select, a=1,ab=1;
 	char equipoSeleccionado;
 	float apuesta;
@@ -227,7 +227,7 @@ float partidosConEmpates(int ordenEquipos[2][40], int numeroEquipos, char equipo
 	return dinero;
 }
 
-float partidosSinEmpate (int ordenEquipos[2][40], int numeroEquipos, char equipos[40][15], float dinero, float stats[],int maximo, int minimo, int id){
+float partidosSinEmpate (int ordenEquipos[2][40], int numeroEquipos, char equipos[40][30], float dinero, float stats[],int maximo, int minimo, int id){
 	int c,seleccion,o,hora,oponente,co,a=1;
 	char equipoSeleccionado;
 	float apuesta;
@@ -319,7 +319,7 @@ float partidosSinEmpate (int ordenEquipos[2][40], int numeroEquipos, char equipo
 	return dinero;
 }
 
-float generacionPartidos (int numeroEquipos, char equipos[40][15], float dinero, float stats[40], int existeEmpate, int maximo, int minimo,int id){
+float generacionPartidos (int numeroEquipos, char equipos[40][30], float dinero, float stats[40], int existeEmpate, int maximo, int minimo,int id){
 	int ordenEquipos[2][40],c=1,o,i,hora,co;
 
 	hora = time(NULL);
