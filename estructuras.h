@@ -1,11 +1,11 @@
 typedef struct{
 
 	//char nombre[100]
-	char concepto[10];
+	char concepto[20];
 	float monto;
-	int dia;
+	/*int dia;
 	int mes;
-	int ano;
+	int ano;*/
 
 }registro;
 
