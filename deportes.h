@@ -125,9 +125,9 @@ float hockey_menu(dinero, id){
 }
 
 float F1_menu(dinero, id){
-	char equipos[40][30]={{"Hamilton"},{"Rosberg"},{"Vettel"},{"Räikkönen"},{"Massa"},{"Bottas"},{"Ricciardo"},{"Kvyat"},
-	{"Pérez"},{"Hulkenberg"},{"Grosjean"},{"Maldonado"},{"Verstappen"},{"Sainz"},{"Ericsson"},{"Nasr"},
-	{"Alonso"},{"Button"},{"Stevens"},{"Rossi"},{"Merhi"}};
+	char equipos[40][30]={{"Hamilton (Mercedez)"},{"Rosberg (Mercedez)"},{"Vettel (Ferrari)"},{"Räikkönen (Ferrari)"},{"Massa (Williams)"},{"Bottas (Williams)"},{"Ricciardo (Red Bull)"},{"Kvyat (Red Bull)"},
+	{"Pérez (Force India)"},{"Hulkenberg (Force India)"},{"Grosjean (Lotus)"},{"Maldonado (Lotus)"},{"Verstappen (Toro Rosso)"},{"Sainz (Toro Rosso)"},{"Ericsson (Sauber)"},{"Nasr (Sauber)"},
+	{"Alonso (McLaren-Honda)"},{"Button (McLaren-Honda)"},{"Stevens (Manor)"},{"Rossi (Manor)"},{"Merhi (Marussia)"}};
 	
 	float stats[40]={363,297,266,135,177,136,84,94,68,52,49,27,49,18,9,27,11,16,1,1,1};
 
