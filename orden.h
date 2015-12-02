@@ -88,10 +88,10 @@ float formula1(int ordenEquipos[2][40], int numeroEquipos, char equipos[40][30],
 	getchar();
 	getchar();
 
-	seleccion--;
 
-	if (ordenEquipos[0][0]==seleccion)
+	if (ordenEquipos[0][0] == seleccion-1){
 		dinero = victoria(ordenEquipos, dinero,  stats, seleccion, seleccion, apuesta, id);
+	}
 	else{
 		dinero -= apuesta;
 		printf("\nHaz perdido: $%.2f\n", apuesta);
