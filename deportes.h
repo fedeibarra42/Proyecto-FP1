@@ -96,7 +96,7 @@ float americano_menu(float dinero, int id){
 	return dinero;
 }
 
-float basketball_menu(dinero, id){
+float basketball_menu(float dinero, int id){
 	char equipos[40][30]={{"Cavaliers"},{"Hawks"},{"Bulls"},{"Raptors"},{"Wizards"},{"Bucks"},{"Celtics"},
 			{"Nets"},{"Pacers"},{"Heat"},{"Hornets"},{"Pistons"},{"Magic"},{"76ers"},{"Knicks"},
 			{"Warriors"},{"Rockets"},{"Clippers"},{"Blazers"},{"Grizzlies"},{"Spurs"},{"Mavericks"},{"Pelicans"},{"Thunder"},
@@ -110,7 +110,7 @@ float basketball_menu(dinero, id){
 	return dinero;
 }
 
-float hockey_menu(dinero, id){
+float hockey_menu(float dinero, int id){
 	char equipos[40][30]={{"Ducks"},{"Blackhawks"},{"Bruins"},{"Hurricanes"},{"Coyotes"},{"Avalanche"},{"Sabres"},
 			{"Blue Jackets"},{"Flames"},{"Stars"},{"Red Wings"},{"Devils"},{"Oilers"},{"Wild"},{"Panthers"},{"Islanders"},
 			{"Kings"},{"Predators"},{"Canadiens"},{"Rangers"},{"Sharks"},{"Blues"},{"Senators"},{"Flyers"},{"Canucks"},
@@ -124,7 +124,7 @@ float hockey_menu(dinero, id){
 	return dinero;
 }
 
-float F1_menu(dinero, id){
+float F1_menu(float dinero, int id){
 	char equipos[40][30]={{"Hamilton (Mercedez)"},{"Rosberg (Mercedez)"},{"Vettel (Ferrari)"},{"Räikkönen (Ferrari)"},{"Massa (Williams)"},{"Bottas (Williams)"},{"Ricciardo (Red Bull)"},{"Kvyat (Red Bull)"},
 	{"Pérez (Force India)"},{"Hulkenberg (Force India)"},{"Grosjean (Lotus)"},{"Maldonado (Lotus)"},{"Verstappen (Toro Rosso)"},{"Sainz (Toro Rosso)"},{"Ericsson (Sauber)"},{"Nasr (Sauber)"},
 	{"Alonso (McLaren-Honda)"},{"Button (McLaren-Honda)"},{"Stevens (Manor)"},{"Rossi (Manor)"},{"Merhi (Marussia)"}};
